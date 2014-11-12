@@ -1,0 +1,15 @@
+<p>Salut{% if billing_address.name %} {{ billing_address.name }}{% endif %},</p>
+<p></p>
+<p>Votre panier d'achat chez {{ shop_name }} est réservé et vous attends !</p>
+<p></p>
+<p>Dans votre panier, vous avez :</p>
+<p></p>
+<p>{% for line in line_items %}{{ line.quantity }}x {{ line.title }}{% endfor %}</p>
+<p></p>
+<p>Mais il n'est pas trop tard ! Pour compléter vos achats, cliquez ce lien: </p>
+<p></p>
+<p>{{ url }}</p>
+<p></p>
+<p>Merci de magasiner chez nous !</p>
+<p></p>
+<p>{{ shop_name }}</p>

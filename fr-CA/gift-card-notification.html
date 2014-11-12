@@ -1,0 +1,15 @@
+<div style="font-family:Sans-Serif;font-size:12px;width:100%;margin:5px;">
+  <p>Salut{% if gift_card.customer %} {{ gift_card.customer.first_name }}{% endif %},</p>
+
+  <p>Voici votre carte cadeau <a href="{{ shop.url }}">{{ shop.name }}</a> d'une valeur de {{ gift_card.initial_value | money_without_trailing_zeros }}.</p>
+
+  {% if gift_card.initial_value != gift_card.balance %}
+  <p>Vous avez {{ gift_card.balance | money_without_trailing_zeros }} de crédit sur cette carte.</p>
+  {% endif %}
+
+  <p><a href="{{ gift_card.url }}">Pour afficher ou imprimer votre carte cadeau, cliquez-ici</a></p>
+
+  <p>Vous avez acheté cette carte cadeau pour quelqu'un d'autre? N'hésitez pas à leur faire suivre ce courriel.</p>
+
+  <p>Merci de magasiner chez <a href="{{ shop.url }}">{{ shop.name }}</a>!</p>
+</div>

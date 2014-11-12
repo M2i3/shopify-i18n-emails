@@ -1,0 +1,41 @@
+Subject: Requête d'exécution de commande pour {{ shop_name }}
+
+{{ service_name }},
+
+S'il vous plaît exécuter la commande {{ name }}.
+
+Nombre total d'items : {{ fulfillment.item_count }}
+Items uniques : {{ fulfillment.fulfillment_line_items.size }}
+
+Items à envoyer :
+{% for line in fulfillment.fulfillment_line_items %}
+  Titre Variation : {{ line.line_item.title }}
+  UGS (SKU) : {{ line.line_item.sku }}
+  Quantité : {{ line.quantity }}
+  Poids (grammes) : {{ line.line_item.grams }}
+  Vendeur : {{ line.line_item.vendor }}
+{% endfor %}
+{% if shipping_address %}
+Adresse de livraison :
+
+  {{ shipping_address.name }}{% if shipping_address.company %}
+  {{ shipping_address.company }}{% endif %}
+  {{ shipping_address.address1 }}
+  {{ shipping_address.address2 }}
+  {{ shipping_address.city }}, {{ shipping_address.province }}
+  {{ shipping_address.zip }}
+  {{ shipping_address.country }}
+{% if shipping_address.phone %}
+  Téléphone: {{ shipping_address.phone }}
+{% endif %}{% endif %}
+Méthode de livraison :
+  {% if shipping_method %}{{ shipping_method.title }}{% else %}Aucune{% endif %}
+
+Numéro de suivi :
+  {% if fulfillment.tracking_number %}{{ fulfillment.tracking_number }}{% else %}Aucun{% endif %}
+
+Courriel du client :
+  {{ email }}
+
+Merci,
+{{ shop_name }}

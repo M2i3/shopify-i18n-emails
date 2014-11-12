@@ -1,0 +1,15 @@
+Subject: Votre carte cadeau {{ shop.name }} est prête !
+
+Salut{% if gift_card.customer %} {{ gift_card.customer.first_name }}{% endif %},
+
+Voici votre carte cadeau {{ shop.name }} d'une valeur de {{ gift_card.initial_value | money_without_trailing_zeros }}.
+
+{% if gift_card.initial_value != gift_card.balance %}Vous avez {{ gift_card.balance | money_without_trailing_zeros }} de crédit sur cette carte.{% endif %}
+
+Pour afficher ou imprimer votre carte cadeau, visitez le lien qui suit:
+<{{ gift_card.url }}>
+
+Vous avez acheté cette carte cadeau pour quelqu'un d'autre? N'hésitez pas à leur faire suivre ce courriel.
+
+Merci de magasiner chez {{ shop.name }}!
+<{{ shop.url }}>

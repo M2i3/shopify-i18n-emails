@@ -1,0 +1,33 @@
+{% if billing_address.name %}
+<p>Cher {{ billing_address.name }},</p>
+<p></p>
+{% endif %}
+<p>{% if fulfillment.item_count == item_count %}Tous les{% elsif fulfillment_status == 'fulfilled' %}Les derniers{% else %}Une portion des{% endif %} items de votre commande {{ name }} ont été envoyés:</p>
+<p>{% for line in fulfillment.fulfillment_line_items %}<img src="{{ line.line_item | img_url: 'small' }}" />{{ line.quantity }}x {{ line.line_item.title }}<br>
+{% endfor %}</p>
+<p>{% if requires_shipping %}Ils sont livrés {% if fulfillment.tracking_company %}via {{ fulfillment.tracking_company }} {% endif %}à l'adresse qui suit : </p>
+
+<p>{{ shipping_address.name }}<br />
+{{ shipping_address.street }}<br />
+{{ shipping_address.city }}<br />
+{{ shipping_address.province }}
+{{ shipping_address.zip }}<br />
+{{ shipping_address.country }}</p>
+
+{% if fulfillment.tracking_numbers.size > 0 %}
+{% if fulfillment.tracking_numbers.size == 1 %}
+<p>Le numéro de suivi pour ces items est le {{ fulfillment.tracking_numbers.first }}. <a href="{{ fulfillment.tracking_urls.first }}">Cliquez ici pour le statut de cette envoie.</a></p>
+{% else %}
+<p>Les numéros de suivi de ces items sont les suivants : </p>
+<p>{% for tracking_number in fulfillment.tracking_numbers %} {{ tracking_number }}<br>{% endfor %}</p>
+
+<p>Cliquez sur les liens qui suivent pour le statut de ces envois :</p>
+<p>{% for tracking_url in fulfillment.tracking_urls %} <a href="{{ tracking_url }}">{{ tracking_url }}</a><br>{% endfor %}</p>
+{% endif %}
+
+<p>Veuillez accorder le temps nécessaire pour que la page de statut affiche correctement à l'adresse précédente.</p>
+{% endif %}{% endif %}{% if fulfillment_status != 'fulfilled' %}
+<p>Vous recevrez un courriel de confirmation supplémentaire lorsque les autres items de votre commande vous seront envoyés.</p>
+{% endif %}
+
+<p>Merci de votre achat chez {{ shop_name }}!</p>

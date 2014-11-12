@@ -1,0 +1,29 @@
+Subject: Confirmation d'envoie de la commande {{ name }}
+
+{% if billing_address.name %}Cher {{ billing_address.name }},{% endif %}
+
+{% if fulfillment.item_count == item_count %}Tous les{% elsif fulfillment_status == 'fulfilled' %}Les derniers{% else %}Une portion des{% endif %} items de votre commande {{ name }} ont été envoyés:
+{% for line in fulfillment.fulfillment_line_items %}
+  {{ line.quantity }}x {{ line.line_item.title }}
+{% endfor %}
+{% if requires_shipping %}{% if requires_shipping %}Ils sont envoyés {% if fulfillment.tracking_company %}via {{ fulfillment.tracking_company }} {% endif %}à l'adresse qui suit :
+
+  {{ shipping_address.name }}
+  {{ shipping_address.address1 }}
+  {{ shipping_address.address2 }}
+  {{ shipping_address.city }}, {{ shipping_address.province }}  {{ shipping_address.zip }}
+  {{ shipping_address.country }}
+{% if fulfillment.tracking_numbers.size > 0 %}
+Les numéros de suivi de ces items sont les suivants :
+{% for tracking_number in fulfillment.tracking_numbers %}
+  {{ tracking_number }}
+{% endfor %}
+Pour connaître l'état de livraison de ces items :
+{% for tracking_url in fulfillment.tracking_urls %}
+  {{ tracking_url }}
+{% endfor %}
+Veuillez accorder le temps nécessaire pour que la page de statut affiche correctement à l'adresse précédente.
+{% endif %}{% endif %}{% if fulfillment_status != 'fulfilled' %}
+Vous recevrez un courriel de confirmation supplémentaire lorsque les autres items de votre commande vous seront envoyés.
+{% endif %}
+Merci de votre achat chez {{ shop_name }}!

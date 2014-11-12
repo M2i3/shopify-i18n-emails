@@ -1,0 +1,7 @@
+Subject: Commande {{ name }} chez {{ shop_name }}
+
+{% if billing_address.name %}Cher {{ billing_address.name }},{% endif %}
+
+
+
+{{ shop_name }}

@@ -1,0 +1,17 @@
+{% if billing_address.name %}
+<p>Cher {{ billing_address.name }},</p>
+{% endif %}
+
+<p>Nous avons de nouvelles informations pour la livraison des items qui suivent pour votre commande {{ name }} :</p>
+
+
+<ul style="list-style-type:none">
+  {% for line in fulfillment.fulfillment_line_items %}<li>
+    <img src="{{ line.line_item | img_url: 'small' }}" />
+    {{ line.quantity }}x {{ line.line_item.title }}
+  </li>{% endfor %}
+</ul>
+
+<p>Ils vous sont envoyés{% if fulfillment.tracking_company %} via {{ fulfillment.tracking_company }}{% endif %} avec le numéro de suivi {{ fulfillment.tracking_number }}. <a href="{{ fulfillment.tracking_url }}">Cliquez ici pour le statut de cette envoie</a>.</p>
+
+<p>Vous recevrez un courriel de confirmation supplémentaire lorsque les autres items de votre commande vous seront envoyés.</p>

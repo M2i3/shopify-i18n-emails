@@ -1,0 +1,38 @@
+<p>{{ service_name }},</p>
+<br>
+<p>S'il vous plaît exécuter la commande {{ name }}.</p>
+<p>Nombre total d'items : {{ fulfillment.item_count }}</p>
+<p>Items uniques : {{ fulfillment.fulfillment_line_items.size }}</p>
+<br>
+<p><strong>Items à envoyer :</strong></p>
+{% for line in fulfillment.fulfillment_line_items %}
+  <p>Titre Variation : {{ line.line_item.title }}</p>
+  <p>UGS (SKU) : {{ line.line_item.sku }}</p>
+  <p>Quantité : {{ line.quantity }}</p>
+  <p>Poids (grammes) : {{ line.line_item.grams }}</p>
+  <p>Vendeur : {{ line.line_item.vendor }}</p>
+{% endfor %}
+{% if shipping_address %}
+<br>
+<p><strong>Adresse de livraison :</strong></p>
+<p>{{ shipping_address.name }}{% if shipping_address.company %}
+  {{ shipping_address.company }}{% endif %}</p>
+<p>{{ shipping_address.address1 }}</p>
+<p>{{ shipping_address.address2 }}</p>
+<p>{{ shipping_address.city }}, {{ shipping_address.province }}</p>
+<p>{{ shipping_address.zip }}</p>
+<p>{{ shipping_address.country }}</p>
+{% if shipping_address.phone %}<p>Téléphone : {{ shipping_address.phone }}</p>{% endif %}
+{% endif %}
+<br>
+<p><strong>Méthode de livraison :</strong></p>
+<p>{% if shipping_method %}{{ shipping_method.title }}{% else %}Aucune{% endif %}</p>
+<br>
+<p><strong>Numéro de suivi :</strong></p>
+<p>{% if fulfillment.tracking_number %}{{ fulfillment.tracking_number }}{% else %}Aucun{% endif %}</p>
+<br>
+<p><strong>Courriel du client :</strong></p>
+<p>{{ email }}</p>
+<br>
+<p>Merci,</p>
+<p>{{ shop_name }}</p>

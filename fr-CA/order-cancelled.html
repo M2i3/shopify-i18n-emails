@@ -1,0 +1,14 @@
+{% if billing_address.name %}
+<p>Cher {{ billing_address.name }}, </p>
+<p></p>
+{% endif %}
+
+<p>Votre commande {{ name }} a été annulée {% case cancel_reason %}{% when 'customer' %}à votre demande.{% when 'inventory' %}parce que nous n avons pas assez d'inventaire pour remplir votre commande.{% when 'fraud' %}parce que nous suspectons qu'elle est frauduleuse.{% when 'other' %}à cause de circonstances inattendues.{% endcase %}</p>
+
+<p></p>
+<p>{% if financial_status == 'voided' %}Votre paiement a été annulé.{% elsif financial_status == 'refunded' %}Votre paiement a été remboursé.{% endif %}</p>
+
+<p>N'hésitez pas à nous contacter si vous avez des questions ou des préoccupations.</p>
+
+<p>Sincèrement,</p>
+<p> {{shop_name}}</p>
