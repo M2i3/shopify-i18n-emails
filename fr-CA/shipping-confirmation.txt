@@ -6,7 +6,7 @@ Subject: Confirmation d'envoie de la commande {{ name }}
 {% for line in fulfillment.fulfillment_line_items %}
   {{ line.quantity }}x {{ line.line_item.title }}
 {% endfor %}
-{% if requires_shipping %}{% if requires_shipping %}Ils sont envoyés {% if fulfillment.tracking_company %}via {{ fulfillment.tracking_company }} {% endif %}à l'adresse qui suit :
+{% if requires_shipping %}Ils sont envoyés {% if fulfillment.tracking_company %}via {{ fulfillment.tracking_company }} {% endif %}à l'adresse qui suit :
 
   {{ shipping_address.name }}
   {{ shipping_address.address1 }}

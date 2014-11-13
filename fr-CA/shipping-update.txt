@@ -1,4 +1,4 @@
-Subject: Shipping update for order {{ name }}
+Subject: Nouvelles informations pour l'envoie de la commande {{ name }}
 
 {% if billing_address.name %}Dear {{ billing_address.name }},{% endif %}
 
