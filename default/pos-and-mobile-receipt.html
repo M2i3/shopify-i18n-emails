@@ -1,0 +1,434 @@
+<!-- Put the Hex code for the  header font colour here -->
+{% assign header_font_color = '#FFFFFF' %}
+<!-- Put the Hex code for the header background colour here -->
+{% assign header_bg_color = '#479ccf' %}
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="format-detection" content="telephone=no">
+    <title>Thanks for your recent purchase!</title>
+    <style type="text/css">
+      @media only screen and (max-width: 640px){
+        [class=appleLinks] a {color:#000000 !important; text-decoration: none;}
+        span[class=appleLinksWhite] a {color:#ffffff !important; text-decoration: none !important;}
+        td[class=shop-info] h1 { font-size:80px !important;line-height:84px !important;}
+        td[class=shop-info] {font-size:30px !important; font-weight:normal !important; line-height:34px !important; color:#ffffff !important;}
+        td[class=top-msg] {height:35px !important; font-weight:normal !important;}
+        table[class=container] { width:100% !important;}
+        table[class=container] td[class=total-top]{ font-size:24px !important; font-weight:normal !important;}
+        table[class=container] span[class=total-amt]{ font-size:80px !important;}
+        td[class=product] {min-width:640px !important;}
+        table[class=product-photo] {width:86px !important; height:86px !important;display:none;}
+        table[class=product-photo] td {max-width:86px !important;}
+        table[class=product-photo] td img {height:86px !important;}
+        table[class=product-name] {width:440px !important; height:86px !important; }
+        table[class=product-name] td {font-size:30px !important;line-height:34px !important; font-weight:normal !important;}
+        table[class=product-name] td span[class=product-variants] {font-size:28px !important; line-height:32px; font-weight:300 !important;}
+        table[class=product-modifier] {width:640px !important; height:50px !important;}
+        table[class=product-modifier] td{ padding:0 0 0 25px !important; font-size:26px !important; font-weight:300 !important;}
+        table[class=product-price] {width:200px !important; height:86px !important;}
+        table[class=product-price] td{font-size:30px !important; line-height:34px !important; font-weight:normal !important;}
+        table[class=payment] {width:640px !important;}
+        table[class=payment-icon] {display:none !important;}
+        table[class=subtotal-desc], table[class=payment-desc], table[class=due-desc] {width:440px !important;}
+        table[class=subtotal-amt], table[class=payment-amt], table[class=due-amt] {width:200px !important;}
+        table[class=subtotal-desc] td, table[class=payment-desc] td, table[class=due-desc] td{font-size:28px !important;line-height:32px !important;font-weight:normal !important;}
+        table[class=subtotal-amt] td, table[class=payment-amt] td, table[class=due-amt] td{font-size:30px !important;line-height:34px !important;font-weight:normal !important;}
+        span[class=payment-details] {font-size:20px  !important;line-height:22px !important;}
+        table[class=footer] td[class=shop-callout] {font-size:28px !important;line-height:32px !important;padding:25px 0 0 !important; font-weight:300 !important;}
+        table[class=footer] a[class=shop-url] {font-size:30px !important;line-height:32px !important;padding:25px 0 0 !important; font-weight:normal !important;}
+        table[class=footer] td img{height:45px;}
+        table[class=footer] td span[class=shopify-callout] {line-height:50px!important;}
+      }
+    </style>
+  </head> 
+  <body style="padding:0;margin:0;">
+
+        <table class="receipt" width="100%" align="center" border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td class="top-msg" style="height:55px;padding:20px 0; text-align:center; background-color:{{ header_bg_color }}; color:{{ header_font_color }} !important; font-family: Helvetica Neue, Helvetica, Proxima Nova, Arial, sans-serif; font-weight:300; font-size:22px; line-height:26px;letter-spacing:1px;">
+                  <i>Thanks for your recent purchase!</i>
+            </td>
+          </tr>
+          <tr>  
+            <td style="height:1px; text-align:center; background-color:{{ header_bg_color }};">
+              <hr class="header-rule" style="padding:0;margin:0 auto;border:0;height:1px;width:440px;background-color:{{ header_font_color }};"/>
+            </td>
+          </tr>
+          <tr>  
+            <td class="shop-info" style="padding:30px 0; text-align:center; background-color:{{ header_bg_color }}; color:{{ header_font_color }} !important; font-family: Helvetica Neue, Helvetica, Proxima Nova, Arial, sans-serif; font-weight:300; font-size:16px; line-height:20px;">
+              <h1 style="font-size:48px !important;font-weight:300;line-height:52px;margin:0 0 10px 0;color:{{ header_font_color }} !important;"><a style="color:{{ header_font_color }} !important; text-decoration: none !important;" href="{{ shop.url }}">{{ shop_name }}</a></h1>
+              {% if location.address1 != blank %}
+              <span class="appleLinksWhite" style="color:{{ header_font_color }} !important; text-decoration: none !important;" >{{ location.address1 }}<br/>{% if location.address2 != blank %}{{ location.address2 }}<br/>{% endif %}{{ location.city }}, {{ location.province }}<br/>{{ location.zip }}</span>
+              {% endif %}
+              </td>
+          </tr>
+          
+          <tr>
+            <td>
+            <table class="container" width="800" align="center" border="0" cellpadding="0" cellspacing="0" >
+              <tr>
+                <td class="total-top" style="padding:50px 0; text-align:center; color:#4c4c4c; font-family: Helvetica Neue, Helvetica, Proxima Nova, Arial, sans-serif; font-size: 18px;" >
+                  TOTAL
+                <br/>
+                <span class="total-amt" style="padding:20px; color:{{ header_bg_color }}; font-size:60px;font-weight:200; line-height:66px;">
+                  {{ total_price | money }}
+                </span>
+                </td>
+              </tr>
+              
+              <!-- PRODUCTS -->
+              {% for line in line_items %}
+              <tr>
+                <td class="product" style="border-top:1px solid #dddddd;min-width:800px;">
+                  {% assign totalLineDiscount = 0 %}
+                  {% for line_discount in line.applied_discounts %}
+                  {% assign totalLineDiscount = totalLineDiscount | plus: line_discount.amount %}
+                  {% endfor %}
+
+                  {% assign line_total = (line.price | times: line.quantity) %}
+                  <!-- PRODUCT PHOTO -->
+                  <table class="product-photo" width="100" align="left" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                      <td valign="middle" style="max-width:100px; overflow:hidden;">
+                        <img src="{{ line | img_url: 'small' }}" alt="{{ line.product.title }}" height="100px"/>
+                      </td>
+                    </tr>
+                  </table>
+                  <!-- PRODUCT NAME -->
+                  <table class="product-name" width="500" height="100" align="left" border="0" cellpadding="0" cellspacing="0" >
+                    <tr>  
+                      <td valign="middle" style="padding-left:25px;text-align:left; color:#000000 !important; font-family: Helvetica Neue, Helvetica, Proxima Nova, Arial, sans-serif; font-size:20px;font-weight:200; line-height:26px;" >
+                        {{ line.product.title | default: line.title }}
+                        {% if line.variant.title != 'Default Title' %}<br/>
+                        <!-- PRODUCT VARIANTS -->
+                        <span class="product-variants" style="font-size:18px;color:#666666;">{{ line.variant.title }}</span>
+                        {% endif %}
+                      </td>
+                    </tr>
+                  </table>
+                  <!-- PRODUCT PRICE -->
+                  <table class="product-price" width="200" height="100" align="left" border="0" cellpadding="0" cellspacing="0" >
+                      <tr>  
+                        <td valign="middle" style="padding-right:30px;text-align:right; color:#4c4c4c; font-family: Helvetica Neue, Helvetica, Proxima Nova, Arial, sans-serif; font-size:24px;font-weight:200; line-height:28px;">
+                          {{ line_total | minus: totalLineDiscount | money }}
+                        </td>
+                      </tr>
+                  </table>
+                </td>
+              </tr>
+                  <!-- PRODUCT MODIFIER -->
+              {% if line.quantity > 1  or line.applied_discounts.size > 0%}
+              <tr>
+                <td>
+                  <table class="product-modifier" width="800" height="30" align="left" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                      <td valign="middle" style=" background-color:#f3f3f3; padding-left:125px;font-family: Helvetica Neue, Helvetica, Proxima Nova, Arial, sans-serif; text-align:left; color:#4c4c4c; font-size:16px;font-weight:200; line-height:20px;">
+                        {% if line.quantity > 1 %}
+                        ({{ line.quantity }} @ {{ line.price | money }})
+                        {% endif %}
+                        
+                        {% for discount in line.applied_discounts %}
+                        {% if discount.description != "" %}{{ discount.description }} -{{ discount.amount | money }} {% else %} -{{ discount.amount | money }} {% endif %}
+                        {% endfor %}
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              {% endif %}
+
+              {% endfor %}
+              
+              <!-- SUBTOTAL INFO -->
+              
+              <tr>
+                <td style="border-top:1px solid #dddddd;padding:40px 0 10px !important;">
+                  <table class="subtotal"  align="center" border="0" cellpadding="0" cellspacing="0" >
+                    
+                      <!-- CART DISCOUNTS -->
+                      {% if discounts %}
+                      <tr>
+                        <td>
+                            <table class="subtotal-desc" width="600" height="60" align="left" border="0" cellpadding="0" cellspacing="0">
+                              <tr>  
+                                <td valign="top" style="padding-top:3px;text-align:right; color:#4c4c4c;font-family: Helvetica Neue, Helvetica, Proxima Nova, Arial, sans-serif; font-size:18px;font-weight:200; line-height:22px;">
+                                  DISCOUNT ({{ discounts.first.code }})
+                                </td>
+                              </tr>
+                            </table>
+                            <table class="subtotal-amt" width="200" height="60" align="left" border="0" cellpadding="0" cellspacing="0">
+                              <tr>  
+                                <td valign="top" width="200" style="padding-right:30px;text-align:right; color:#4c4c4c; font-family: Helvetica Neue, Helvetica, Proxima Nova, Arial, sans-serif; font-size:24px;font-weight:200; line-height:28px;">
+                                  {{ discounts_savings | money }}
+                                </td>
+                              </tr>
+                            </table>
+                          </td>
+                      </tr>
+                      {% endif %}
+                      
+                      <!-- SUBTOTAL -->
+                      <tr>
+                        <td>
+                            <table class="subtotal-desc" width="600" height="60" align="left" border="0" cellpadding="0" cellspacing="0">
+                              <tr>  
+                                <td valign="top" style="padding-top:3px;text-align:right; color:#4c4c4c;font-family: Helvetica Neue, Helvetica, Proxima Nova, Arial, sans-serif; font-size:18px;font-weight:200; line-height:22px;">
+                                  SUBTOTAL
+                                </td>
+                              </tr>
+                            </table>
+                            <table class="subtotal-amt" width="200" height="60" align="left" border="0" cellpadding="0" cellspacing="0">
+                              <tr>  
+                                <td valign="top" width="200" style="padding-right:30px;text-align:right; color:#4c4c4c; font-family: Helvetica Neue, Helvetica, Proxima Nova, Arial, sans-serif; font-size:24px;font-weight:200; line-height:28px;">
+                                  {{ subtotal_price | money }}
+                                </td>
+                              </tr>
+                            </table>
+                        </td>
+                      </tr>
+                      
+                      <!-- TAXES -->
+                      {% for tax_line in tax_lines %}
+                      <tr>
+                        <td>
+                          <table class="subtotal-desc" width="600" height="60" align="left" border="0" cellpadding="0" cellspacing="0">
+                            <tr>  
+                              <td valign="top" style="padding-top:3px;text-align:right; color:#4c4c4c;font-family: Helvetica Neue, Helvetica, Proxima Nova, Arial, sans-serif; font-size:18px;font-weight:200; line-height:22px;">
+                                {{ tax_line.title }} ({{tax_line.rate | times:100}}%)
+                              </td>
+                            </tr>
+                          </table>
+                          <table class="subtotal-amt" width="200" height="60" align="left" border="0" cellpadding="0" cellspacing="0">
+                            <tr>  
+                              <td valign="top" width="200" style="padding-right:30px;text-align:right; color:#4c4c4c; font-family: Helvetica Neue, Helvetica, Proxima Nova, Arial, sans-serif; font-size:24px;font-weight:200; line-height:28px;">
+                                {{ tax_line.price | money }}
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                      {% endfor %}
+                        
+                      <!-- TOTAL -->
+                      <tr>
+                        <td>
+                          <table class="subtotal-desc" width="600" height="60" align="left" border="0" cellpadding="0" cellspacing="0">
+                            <tr>  
+                              <td valign="top" style="padding-top:3px;text-align:right; color:#4c4c4c;font-family: Helvetica Neue, Helvetica, Proxima Nova, Arial, sans-serif; font-size:18px;font-weight:200; line-height:22px;">
+                                TOTAL
+                              </td>
+                            </tr>
+                          </table>
+                          <table class="subtotal-amt" width="200" height="60" align="left" border="0" cellpadding="0" cellspacing="0">
+                            <tr>  
+                              <td valign="top" width="200" style="padding-right:30px;text-align:right; color:#4c4c4c; font-family: Helvetica Neue, Helvetica, Proxima Nova, Arial, sans-serif; font-size:24px;font-weight:200; line-height:28px;">
+                                {{ total_price | money }}
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                      
+                  </table>
+                </td>
+              </tr>
+              
+              <!-- PAYMENT INFO -->
+              {% assign has_been_refunded = false %}
+              {% if transactions != blank %}
+
+              <tr>
+                <td style="border-top:1px solid #dddddd;padding:45px 0 0px;">
+                    {% assign total_paid = 0 %}
+                    {% assign change_info = '' %}
+                    
+                    {% for transaction in transactions %}
+                    
+                          {% if transaction.status == 'success' or transaction.status == null %}
+                            {% assign card = null %}
+                    
+                          {% if transaction.kind == 'refund' %}
+                            {% assign kind = 'refunded' %}
+                            {% assign has_been_refunded = true %}
+                          {% else %}
+                            {% assign kind = transaction.kind %}
+                          {% endif %}
+
+                          {% if transaction.kind == 'sale' or transaction.kind == 'capture' %}
+                            {% assign total_paid = total_paid | plus: transaction.amount %}
+                          {% elsif transaction.kind == 'change' or transaction.kind == 'refund' %}
+                            {% assign total_paid = total_paid | minus: transaction.amount %}
+                          {% endif %}
+
+                          {% if transaction.gateway == 'shopify_payments' %}
+
+                            {% assign payment = transaction.receipt.card.type %}
+                            {% assign card = transaction.receipt.card.last4 %}
+
+                            {% if kind == 'sale' %}
+                              {% assign kind = 'approved' %}
+                            {% endif %}
+                    
+                          {% else %}
+                    
+                            {% case transaction.gateway %}
+                              {% when 'external-credit' %}
+                                {% assign payment = transaction.receipt.payment_details.credit_card_company %}
+                              {% when 'external-debit' %}
+                                {% assign payment = 'debit' %}
+                              {% else %}
+                                {% assign payment = transaction.gateway %}
+                            {% endcase %}
+
+                            {% if kind == 'sale' %}
+                              {% assign kind = null %}
+                            {% endif %}
+                    
+                          {% endif %}
+                        
+                          {% assign transaction_img = '' %}
+                          {% assign paymentTypeLower = (payment | downcase) %}
+                          
+                          {% if paymentTypeLower == 'store-credit' %}
+                            {% assign transaction_img = 'mobile-receipt-storecredit.png' | file_url %} 
+                          {% elsif paymentTypeLower == 'visa' %}
+                            {% assign transaction_img = 'mobile-receipt-visa.png' | file_url %} 
+                          {% elsif paymentTypeLower == 'mastercard' %}
+                            {% assign transaction_img = 'mobile-receipt-mastercard.png' | file_url %} 
+                          {% elsif paymentTypeLower == 'amex' or paymentTypeLower == 'american express' %}
+                            {% assign transaction_img = 'mobile-receipt-amex.png' | file_url %} 
+                          {% elsif paymentTypeLower == 'discover' %}
+                            {% assign transaction_img = 'mobile-receipt-discover.png' | file_url %} 
+                          {% elsif paymentTypeLower == 'diners-club' or paymentTypeLower == 'diners club' %}
+                            {% assign transaction_img = 'mobile-receipt-dinersclub.png' | file_url %} 
+                          {% elsif paymentTypeLower == 'jcb' %}
+                            {% assign transaction_img = 'mobile-receipt-credit.png' | file_url %} 
+                          {% elsif paymentTypeLower == 'debit' %}
+                            {% assign transaction_img = 'mobile-receipt-debit.png' | file_url %} 
+                          {% endif %}
+                          
+                          {% capture table_cell %}
+                          <table class="payment" width="800" height="60" align="center" border="0" cellpadding="0" cellspacing="0" >
+                            <tr>
+                              <td valign="top" style="padding:0 0 15px 0;">
+                                
+                                <table class="payment-icon" width="360" height="60" align="left" border="0" cellpadding="0" cellspacing="0">
+                                  <tr>
+                                    <td valign="top" style="text-align:right; color:#4c4c4c;font-family: Helvetica Neue, Helvetica, Proxima Nova, Arial, sans-serif; font-size:18px;font-weight:200; line-height:22px;">
+                                      {% if transaction_img != '' %}<img style="padding:0" alt="{{payment}} Icon" src='{{transaction_img}}' />{% endif %} 
+                                    </td>
+                                  </tr>
+                                </table>
+                                <table class="payment-desc" width="240" height="60" align="left" border="0" cellpadding="0" cellspacing="0">
+                                  <tr>
+                                    <td valign="top" style="padding:2px 0 0 0;text-align:right; color:#4c4c4c;font-family: Helvetica Neue, Helvetica, Proxima Nova, Arial, sans-serif; font-size:18px;font-weight:200; line-height:22px;">{% if kind == 'change' %}CHANGE DUE{% else %}{{payment|upcase}}{% endif %}
+                                      {%if transaction.gateway == 'external-credit' or transaction.gateway == 'shopify_payments'%}<span class="payment-details" style="font-size:16px;line-height:20px;color:#4c4c4c;">{% if card %}<br/>Ends in {{ card }}{% endif %}<br/>{{ transaction.created_at | date: "%d/%m/%y %H:%M:%S %Z" }}
+                                      </span>
+                                      {% endif %}
+                                    </td>
+                                  </tr>
+                                </table>
+                                <table class="payment-amt" width="200" height="60" align="left" border="0" cellpadding="0" cellspacing="0">
+                                  <tr>  
+                                    <td valign="top" width="200" style="padding:0 30px 0 0;text-align:right; color:#4c4c4c; font-family: Helvetica Neue, Helvetica, Proxima Nova, Arial, sans-serif; font-size:24px;font-weight:200; line-height:22px;">
+                                      {% if transaction.kind == 'refund'%}
+                                      -{{ transaction.amount | money }}
+                                      {% else %}
+                                      {{ transaction.amount | money }}
+                                      {% endif %}
+                                    </td>
+                                  </tr>
+                                </table>
+                          </td>
+                        </tr>
+                      </table>
+                          {% endcapture %}
+                            {% if kind != 'change' %}
+                            
+                                  {{ table_cell }}
+                             
+                            {% else %}
+                              {% assign change_info = table_cell %}
+                            {% endif %}
+                          {% endif %}
+                    {% endfor %}
+                </td>
+              </tr>
+
+              <!-- CHANGE OR AMOUNT DUE -->
+              {% if has_been_refunded == false %}
+                {% assign balance_due = total_price | minus: total_paid %}
+                {% if financial_status == 'partially_paid' or balance_due > 0 or change_info != '' %}
+                <tr>
+                  <td style="border-top:1px solid #dddddd;padding:45px 0 0;">
+                    {% if change_info != '' %}
+                      {{ change_info }}
+                    {% elsif financial_status == 'partially_paid' or balance_due %}
+                      <table class="due-desc" width="600" height="100" align="left" border="0" cellpadding="0" cellspacing="0">
+                        <tr>  
+                          <td valign="top"  style="padding:3px 0 0;text-align:right; color:#4c4c4c;font-family: Helvetica Neue, Helvetica, Proxima Nova, Arial, sans-serif; font-size:18px;font-weight:200; line-height:22px;">
+                            BALANCE DUE
+                          </td>
+                        </tr>
+                      </table>
+                      <table class="due-amt" width="200" height="100" align="left" border="0" cellpadding="0" cellspacing="0">
+                        <tr>  
+                          <td valign="top" width="200" style="padding:0 30px 0 0;text-align:right; color:#4c4c4c; font-family: Helvetica Neue, Helvetica, Proxima Nova, Arial, sans-serif; font-size:24px;font-weight:200; line-height:22px;">
+                            {{ balance_due | money }}
+                          </td>
+                        </tr>
+                      </table>
+                  
+                    {% endif %}
+                  </td>
+                </tr>
+                {% endif %}
+              {% endif %}
+              {% else %}
+              <tr>
+                <td style="border-top:1px solid #dddddd;padding:45px 0 0;">
+                    <table class="due-desc" width="600" height="100" align="left" border="0" cellpadding="0" cellspacing="0">
+                      <tr>  
+                        <td valign="top"  style="padding:3px 0 0;text-align:right; color:#4c4c4c;font-family: Helvetica Neue, Helvetica, Proxima Nova, Arial, sans-serif; font-size:18px;font-weight:200; line-height:22px;">
+                          BALANCE DUE
+                        </td>
+                      </tr>
+                    </table>
+                    <table class="due-amt" width="200" height="100" align="left" border="0" cellpadding="0" cellspacing="0">
+                      <tr>  
+                        <td valign="top" width="200" style="padding:0 30px 0 0;text-align:right; color:#4c4c4c; font-family: Helvetica Neue, Helvetica, Proxima Nova, Arial, sans-serif; font-size:24px;font-weight:200; line-height:22px;">
+                          {{ total_price | money }}
+                        </td>
+                      </tr>
+                    </table>
+                </td>
+              </tr>
+              {% endif %}
+               <!-- FOOTER -->
+              <tr>
+                <td style="padding:60px 0 0 0;">
+                  <table class="footer" width="100%" align="center" border="0" cellpadding="0" cellspacing="0" >
+                    <tr>  
+                      <td class="shop-callout" valign="top" style="color:#666666; margin:10px 0 0;height:50px;text-align:center; font-family: Helvetica Neue, Helvetica, Proxima Nova, Arial, sans-serif; font-weight:300;font-size:18px; ">
+                       You can visit us online at<br/> <a class="shop-url" style="font-size:20px; line-height:24px; color:#000000 !important;text-decoration:none !important;" href="{{ shop.url }}">{% if shop.domain != '' %}{{ shop.domain }}{% else %}{{ shop.url }}{% endif %}</a>
+                      </td>
+                    </tr>
+                    <tr>  
+                      <td valign="middle" style="padding:35px 0;text-align:center;">
+                        <span class="shopify-callout"style="line-height:28px;"><a href="http://www.shopify.com" style="color:#a1a1a1;text-decoration:none;"></a></span>
+                        <a href="http://www.shopify.com/pos?utm_source=receipt&utm_medium=pos-banner&utm_campaign=shopify-img" style="color:#a1a1a1;text-decoration:none;"><img style="padding:0 4px;" height="32px" align="top" alt="Shopify" src="{{ 'mobile-receipt-shopify.png' | file_url }}" /></a>
+                      
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+  </body> 
+</html>

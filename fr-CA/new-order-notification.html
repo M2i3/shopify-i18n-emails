@@ -1,23 +1,23 @@
-<p>Hello {{ shop_name }},</p>
+<p>Bonjour {{ shop_name }},</p>
 <p></p>
-<p>{% if customer.name %}{{ customer.name }}{% else %}Someone{% endif %} placed a new order with you today, {{ date | date: "%b %d %I:%M%p" }}:</p>
+<p>{% if customer.name %}{{ customer.name }}{% else %}Quelqu'un{% endif %} a placé une nouvelle commande chez vous aujourd'hui, {{ date | date: "%b %d %I:%M%p" }}:</p>
 <p></p>
-<ul>  {% for line in line_items %} <li> <img src="{{ line | img_url: 'thumb' }}" /> {{ line.quantity }}x {{ line.title }} for {{ line.price | money }} each </li> {% endfor %} </ul>
-<a href="{{ shop.url }}/admin/orders/{{ id }}">View order {{order_name}} </a>
+<ul>  {% for line in line_items %} <li> <img src="{{ line | img_url: 'thumb' }}" /> {{ line.quantity }}x {{ line.title }} pour {{ line.price | money }} l'unité </li> {% endfor %} </ul>
+<a href="{{ shop.url }}/admin/orders/{{ id }}">Afficher la commande {{order_name}} </a>
 {% if fulfillment_aborted %}
-<p>The above order was not automatically fulfilled because it was flagged as suspicious.</p>{% endif %}
+<p>Cetre commande n'a pas été automatiquement exécutée parce qu'elle a été identifiée comme suspecte.</p>{% endif %}
 <p></p><br>
-{% if has_high_risks? %}<p><b>Security check:</b></p>
-<p>This order has a risk of being fraudulent. Review the order in your store's admin and contact the customer to verify their information.</p>
+{% if has_high_risks? %}<p><b>Contrôle de sécurité:</b></p>
+<p>Cette commande semble être frauduleuse. Vérifiez cette commande dans l'interface d'administration de votre magasin et communiquez avec le client pour valider leurs informations.</p>
 <p></p>{% endif %}
-<p><b>Payment processing method:</b></p>
+<p><b>Méthode de paiement:</b></p>
 <p>{{ gateway }}</p>
 <p></p>
 {% if requires_shipping and shipping_address %}
-<p><b>Delivery method:</b></p>
+<p><b>Méthode de livraison:</b></p>
 {% for shipping_method in shipping_methods %}<p>{{ shipping_method.title }}</p>{% endfor %}
 <p></p>
-<p><b>Shipping address:</b></p>
+<p><b>Adresse de livraison</b></p>
 <p>{{ shipping_address.name }}</p>
 <p>{{ shipping_address.street }}</p>
 <p>{{ shipping_address.city }}, {{ shipping_address.province }}  {{ shipping_address.zip }}</p>

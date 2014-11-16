@@ -20,6 +20,7 @@ Each template has two files, one with the extension .html (the html version of t
 | new-order-notification-mobile   |  New Order Notification (mobile) | Sent to all subscribers of Order Confirmation Notifications for mobile   |
 | order-cancelled                 | Order Cancelled                  | Sent to the customer when an order is cancelled                          |
 | order-confirmation              | Order Confirmation               | Sent to the customer when an order is created                            |
+| pos-and-mobile-receipt          | POS and Mobile Receipt           | Sent to customer through point of sale and mobile                        |
 | refund-notification             | Refund Notification              | Sent to the customer when their order is refunded                        |
 | Shipping confirmation           | Shipping confirmation            | Sent to the customer when an order is shipped                            |
 | Shipping update                 | Shipping update                  | Sent to the customer when an order's shipping information is updated     |

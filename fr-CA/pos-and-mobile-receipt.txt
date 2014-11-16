@@ -1,0 +1,51 @@
+Subject: Reçu pour la commande {{name}}
+
+Merci pour votre achat !
+
+{{ shop_name }}
+{% if location.address1 != blank %}{{ location.address1 }} {% if location.address2 != blank %}{{ location.address2 }}{% endif %}
+{{ location.city }}, {{ location.province }}
+{{ location.zip }}
+{% endif %}
+
+---
+
+
+TOTAL
+{{ total_price | money }}
+
+
+---
+
+{% for line in line_items %}
+{% assign totalLineDiscount = 0 %}{% for line_discount in line.applied_discounts %}{% assign totalLineDiscount = totalLineDiscount | plus: line_discount.amount %}{% endfor %}{% assign line_total = (line.price | times: line.quantity) %}{{ line.product.title | default: line.title }} {% if line.variant.title != 'Default Title' %}{{ line.variant.title }}{% endif %} - {{ line_total | minus: totalLineDiscount | money }} {% if line.quantity > 1  or line.applied_discounts.size > 0%}{% if line.quantity > 1 %}({{ line.quantity }} @ {{ line.price | money }}){% endif %} {% for discount in line.applied_discounts %} {% if discount.description != "" %} ( {{ discount.description }} -{{ discount.amount | money }} ) {% else %} ( -{{ discount.amount | money }} ){% endif %}{% endfor %}{% endif %}
+{% endfor %} 
+
+---
+
+{% if discounts %}
+RABAIS - ({{ discounts.first.code }})  {{ discounts_savings | money }}
+{% endif %}
+SOUS-TOTAL - {{ subtotal_price | money }}
+
+{% for tax_line in tax_lines %}{{ tax_line.title }} ({{tax_line.rate | times:100}}%) - {{ tax_line.price | money }} {% endfor %}
+
+TOTAL - {{ total_price | money }}
+
+
+---
+{% assign has_been_refunded = false %}{% if transactions != blank %}{% assign total_paid = 0 %}{% assign change_info = '' %}{% for transaction in transactions %}{% if transaction.status == 'success' or transaction.status == null %}{% assign card = null %}                   {% if transaction.kind == 'refund' %}{% assign kind = 'refunded' %}{% assign has_been_refunded = true %}{% else %}{% assign kind = transaction.kind %}{% endif %}{% if transaction.kind == 'sale' or transaction.kind == 'capture' %}{% assign total_paid = total_paid | plus: transaction.amount %}{% elsif transaction.kind == 'change' or transaction.kind == 'refund' %}{% assign total_paid = total_paid | minus: transaction.amount %}{% endif %}{% if transaction.gateway == 'shopify_payments' %}{% assign payment = transaction.receipt.card.type %}{% assign card = transaction.receipt.card.last4 %}{% if kind == 'sale' %}{% assign kind = 'approved' %}{% endif %}{% else %}{% case transaction.gateway %}{% when 'external-credit' %}{% assign payment = transaction.receipt.payment_details.credit_card_company %}{% when 'external-debit' %}{% assign payment = 'debit' %}{% else %}{% assign payment = transaction.gateway %}{% endcase %}{% if kind == 'sale' %}{% assign kind = null %}{% endif %}{% endif %}
+{% capture table_cell %}{% if kind == 'change' %}MONAIE À REMETTRE{% else %}{{payment|upcase}}{% endif %} {%if transaction.gateway == 'external-credit' or transaction.gateway == 'shopify_payments'%}{% if card %}Ends in {{ card }}{% endif %}{{ transaction.created_at | date: "%d/%m/%y %H:%M:%S %Z" }}{% endif %}- {% if transaction.kind == 'refund'%}-{{ transaction.amount | money }}{% else %}{{ transaction.amount | money }}{% endif %}{% endcapture %}
+{% if kind != 'change' %}{{ table_cell }}{% else %}{% assign change_info = table_cell %}{% endif %}{% endif %}
+{% endfor %}
+
+---
+
+{% if has_been_refunded == false %}{% assign balance_due = total_price | minus: total_paid %}
+{% if financial_status == 'partially_paid' or balance_due > 0 or change_info != '' %}{% if change_info != '' %}{{ change_info }}{% elsif financial_status == 'partially_paid' or balance_due %}BALANCE DUE - {{ balance_due | money }}{% endif %}{% endif %}{% endif %}
+
+{% else %}SOLDE À PAYER - {{ total_price | money }}{% endif %}
+
+
+Vous pouvez nous visiter en ligne à
+{% if shop.domain != '' %}{{ shop.domain }}{% else %}{{ shop.url }}{% endif %}

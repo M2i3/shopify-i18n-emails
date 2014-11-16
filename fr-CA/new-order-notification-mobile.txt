@@ -1,5 +1,5 @@
-Subject: Order {{ name }}
+Subject: Commande {{ name }}
 
 {{ shop_name }},
 
-{{ customer.name | default: "A customer" }} placed a new order with you today ({{ date | date: "%b %d %I:%M%p" }}).
+{{ customer.name | default: "Un client" }} a placé une nouvelle commande chez vous aujourd'hui ({{ date | date: "%b %d %I:%M%p" }}).
